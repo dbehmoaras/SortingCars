@@ -25,6 +25,13 @@ public class Car implements Comparable<Car> {
 	}
 
 
+	/**
+	 * We do not need to check if VINs are equal since the VIN data
+	 * is already defined to be unique.
+	 * @param car: car object to compare to this car
+	 * @return int: returns the sign depending on the result of the
+	 * comparison.
+	 */
 	public int compareTo(Car car){
 		/**
 		 * Get destination and color car sort criteria from the
