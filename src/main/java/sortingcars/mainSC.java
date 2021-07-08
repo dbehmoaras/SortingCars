@@ -18,29 +18,13 @@ public class mainSC{
 		// System.out.println(b.compareTo(a));
 
 		Car testCar1 = new Car(1, "PW4Y2JD5099A", Color.BLACK, "Los Angeles");
-		System.out.println(testCar1.getRecId());
-		System.out.println(testCar1.getVin());
-		System.out.println(testCar1.getColor());
-		System.out.println(testCar1.getDestination());
-
 		Car testCar2 = new Car(2, "ND5N2XLUDMTB", Color.RED, "Miami");
-		System.out.println(testCar2.getRecId());
-		System.out.println(testCar2.getVin());
-		System.out.println(testCar2.getColor());
-		System.out.println(testCar2.getDestination());
-
 		Car testCar3 = new Car(1, "PW4Y2JD5099B", Color.BLACK, "Los Angeles");
-		System.out.println(testCar3.getRecId());
-		System.out.println(testCar3.getVin());
-		System.out.println(testCar3.getColor());
-		System.out.println(testCar3.getDestination());
 
-		System.out.println("*****************************");
-		System.out.println(testCar1.compareTo(testCar2));
-		System.out.println(testCar2.compareTo(testCar1));
-		System.out.println(testCar3.compareTo(testCar1));
-		System.out.println(testCar1.compareTo(testCar3));
-		System.out.println(testCar2.compareTo(testCar3));
-		System.out.println(testCar3.compareTo(testCar2));
+		String fileName = CreateTxt.create(1);
+		WriteToTxt.write(fileName, testCar1);
+		WriteToTxt.write(fileName, testCar2);
+		WriteToTxt.write(fileName, testCar3);
+
 	}
 }
