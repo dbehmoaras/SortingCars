@@ -32,7 +32,7 @@ public class mainSC{
 
 		// System.out.println(ThreadLocalRandom.current().nextInt(0,100));
 
-		RandomString gen = new RandomString(12, ThreadLocalRandom.current());
+		UniqueVinGen gen = new UniqueVinGen(12, ThreadLocalRandom.current());
 		String randString = gen.nextString();
 		System.out.println(randString);
 	}
