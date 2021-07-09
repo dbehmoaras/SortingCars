@@ -1,12 +1,15 @@
 package sortingcars;
 
-// import sortingcars.SortCriteria;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
+
 
 public class Car implements Comparable<Car> {
 	private long REC_ID;
 	private String VIN;
 	private Color COLOR;
 	private String DESTINATION;
+	private UniqueVinGen vinGen = new UniqueVinGen(12, ThreadLocalRandom.current());
 
 	/* define the enumerator for the Color options */
 	public static enum Color {
@@ -16,12 +19,56 @@ public class Car implements Comparable<Car> {
 		WHITE
 	};
 
-	/* Main constructor method for the Car class */
-	public Car(long rec_id, String vin, Color color, String destination){
+	/**
+	 * The Car constructor is overloaded so that it can be
+	 * initilized in a variety of ways, including a version with
+	 * a single argument of rec_id so that cars can be
+	 * manufactured with randomly generated attributes for the
+	 * car sorting algorithm.
+	 * @param rec_id
+	 * @param color
+	 * @param destination
+	 */
+	public Car(long rec_id, Color color, String destination){
 		REC_ID = rec_id;
-		VIN = vin;
+		VIN = vinGen.nextString();
 		COLOR = color;
 		DESTINATION = destination;
+	}
+
+	/**
+	 * Overloaded constructor for a random Car generator.
+	 * @param rec_id
+	 */
+	public Car(long rec_id){
+		REC_ID = rec_id;
+		VIN = vinGen.nextString();
+		COLOR = getRandomColor();
+		DESTINATION = getRandomDest();
+	}
+
+
+
+	/**
+	 * Chooses a random color for the car.
+	 * @return
+	 */
+	public static Color getRandomColor(){
+		Random rand = new Random();
+		Color[] colorArr = Color.class.getEnumConstants();
+		return colorArr[rand.nextInt(colorArr.length)];
+	}
+
+	public static String getRandomDest(){
+		String[] destinations = {
+			"Los Angeles",
+			"Houston",
+			"New Orleans",
+			"Miami",
+			"New York"
+		};
+		Random rand = new Random();
+		return destinations[rand.nextInt(destinations.length)];
 	}
 
 
@@ -55,18 +102,20 @@ public class Car implements Comparable<Car> {
 		else return 1;
 	}
 
+
+
+
 	/**
 	 * Mutator and accessor methods for the car class are all
-	 * below this line.
+	 * below this javadoc. The methods are self explanatory.
+	 * A mutator is not needed for the VIN is not needed since
+	 * it is a randomly generated unique 12-digit alphanumeric
+	 * String.
 	 *
 	 */
 
 	public void setRecId(long id){
 		REC_ID = id;
-	}
-
-	public void setVin(String vin){
-		VIN = vin;
 	}
 
 	public void setColor(Color col){

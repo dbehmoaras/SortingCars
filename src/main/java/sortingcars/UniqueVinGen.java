@@ -9,7 +9,7 @@ public class UniqueVinGen {
 
 	public static final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	public static final String digits = "0123456789";
-	public static final String alphanum = digits;// + upper;
+	public static final String alphanum = digits + upper;
 
 	private final Random random;
 	private final char[] symbols;
@@ -34,7 +34,11 @@ public class UniqueVinGen {
 		return localVin;
 	}
 
-	public String getString() {
+	/**
+	 *
+	 * @return String: the string with randomly generated characters.
+	 */
+	private String getString() {
 		for (int i = 0; i < buf.length; i += 1){
 			buf[i] = symbols[random.nextInt(symbols.length)];
 		}
