@@ -1,26 +1,31 @@
 package sortingcars;
-import java.util.concurrent.ThreadLocalRandom;
-
-import sortingcars.Car.Color;
-
-
 
 public class mainSC{
 	public static void main (String[] args){
 
-		Car testCar1 = new Car(1, Color.BLACK, "Los Angeles");
-		Car testCar2 = new Car(2, Color.RED, "Miami");
-		Car testCar3 = new Car(3, Color.BLACK, "Los Angeles");
+		/**
+		 * Main method
+		 */
 
-		String fileName = GenerateData.createFile(1);
-		GenerateData.clear(fileName);
-		GenerateData.write(fileName, testCar1);
-		GenerateData.write(fileName, testCar2);
-		GenerateData.write(fileName, testCar3);
+		generateCarData();
+	}
 
-		Color[] colorArr = Color.class.getEnumConstants();
+	public static void generateCarData(){
+		/**
+		 * create the file list and begin the rec_id count
+		 * make sure all of the data is clear in case the
+		 * files already exist
+		 */
+		int numberOfLists = 5;
+		int numberOfCars = 100;
+		String[] fileList = GenerateData.createFiles(numberOfLists);
+		long rec_id = 0;
+		GenerateData.clearAll(fileList);
 
-		System.out.println(Car.getRandomColor());
+		for (rec_id++; rec_id <= numberOfCars; rec_id++){
+			Car car = new Car(rec_id);
+			GenerateData.write(fileList[(int) rec_id % numberOfLists], car);
+		}
 
 	}
 }
