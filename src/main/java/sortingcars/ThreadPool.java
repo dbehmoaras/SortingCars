@@ -12,7 +12,7 @@ public class ThreadPool {
 		new LinkedList<PoolThreadJob>();
 	private boolean isStopped = false;
 
-	public ThreadPool(int noOfThreads, int maxNoOfTasks) {
+	public ThreadPool(int maxNoOfThreads, int maxNoOfTasks) {
 		taskQueue = new LinkedBlockingQueue<PoolThreadJob>(maxNoOfTasks);
 	}
 
