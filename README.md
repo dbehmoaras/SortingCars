@@ -2,6 +2,7 @@
 
 To do:
 1. Create the list files. all of the pieces are ready.
+	a. add a read method
 2. Implement the quicksort object array algorithm by accessing the car's compareTo method in the quicksort engine's partition method.
 3. Set up a thread pool the creates a thread for each list
 4. find a way run quicksort in separate threads
@@ -67,5 +68,14 @@ git commit -m "added clear method to data generator. generates the Vin randomly 
 			Car car = new Car(rec_id);
 			GenerateData.write(fileList[(int) rec_id % numberOfLists], car);
 		}
+
+		LinkedList<Car> carList = CarData.readList(fileList[0]);
+		// String[] stringSplit = carList.get(0).split("\t");
+		// System.out.println(stringSplit[0]+ stringSplit[1]+ stringSplit[2]+ stringSplit[3]);
+		ListIterator<Car> carIter = carList.listIterator();
+		while(carIter.hasNext()){
+			System.out.println(carIter.next());
+		}
+
 
 ```

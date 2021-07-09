@@ -5,13 +5,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.List;
+import java.util.LinkedList;
+import sortingcars.Car.Color;
 
 /**
  * Simple function that creates a car list in a txt format.
  * @param int: the number of the car list created
  * @return String: the file name so it can be used by the write method
  */
-public class GenerateData {
+public class CarData {
+
+	private static String[] fileList;
+
 	public static String createFile(int listNum){
 		try {
 			File myObj = new File("carlists/cars-"+listNum+".txt");
@@ -83,5 +89,70 @@ public class GenerateData {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Reads a car list stored in a text file and
+	 * @param fileName
+	 * @return LinkedList<Car> a linked list containing the car objects
+	 */
+	public static LinkedList<Car> readList(String fileName){
+		try {
+			List<String> carListStrings = Files.readAllLines(Paths.get("carlists/"+fileName));
+			LinkedList<Car> carList = new LinkedList<Car>();
+
+			/**
+			 * Iterate through the list of car strings to isolate each string
+			 * and generate a car object based on the data stored in the txt
+			 * files.
+			 */
+			for(int i = 0; i < carListStrings.size(); i += 1){
+				String[] carString = carListStrings.get(i).split("\t");
+				Car car = new Car(
+					Long.valueOf(carString[3]),
+					carString[2],
+					Color.valueOf(carString[1]),
+					carString[0]
+				);
+				carList.push(car);
+			}
+			return carList;
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Generates car
+	 *
+	 */
+
+	 /**
+		* Generates car data randomly using the Car constructor with only the
+		* rec_id parameter.
+		* @param numberOfLists
+		* @param numberOfCars
+	  */
+	public static void generateCarData(int numberOfLists, int numberOfCars) {
+		/**
+		 * create the file list and begin the rec_id count make sure all of the data is
+		 * clear in case the files already exist
+		 */
+		fileList = CarData.createFiles(numberOfLists);
+		long rec_id = 0;
+		CarData.clearAll(fileList);
+
+		for (rec_id++; rec_id <= numberOfCars; rec_id++) {
+			Car car = new Car(rec_id);
+			CarData.write(fileList[(int) rec_id % numberOfLists], car);
+		}
+	}
+
+
+
+	public static String[] getFileList(){
+		return fileList;
 	}
 }
