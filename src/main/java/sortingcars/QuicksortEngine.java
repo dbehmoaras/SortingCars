@@ -4,59 +4,37 @@ import java.util.LinkedList;
 
 public class QuicksortEngine {
 
-	private static LinkedList<Car> localCarList;
-
-	public static void main(String[] args) {
-		// Get an String array
-		// a = new String[] { "X", "E", "C", "A" };
-		CarDataController.generateCarData(5,100);
-		CarDataController.createFiles(5, true);
-		setLocalCarList(CarDataController.readList(CarDataController.getFileList()[1]));
-
-		// prints the given array
-		printArray();
-
-		// sort the array
-		sort();
-
-		CarDataController.writeSortedCarData(localCarList, 1);
-
-		System.out.println(localCarList);
-
-		// prints the sorted array
-		printArray();
-
+	public QuicksortEngine(){
 	}
 
-	// This method sort an array internally and internally calls quickSort
-	public static void sort() {
+	public void sort(LinkedList<Car> localCarList) {
 		int left = 0;
 		int right = localCarList.size() - 1;
 
-		quickSort(left, right);
+		quickSort(left, right, localCarList);
 	}
 
 	// This method is used to sort the array using quicksort algorithm.
 	// It takes left and the right end of the array as two cursors
-	private static void quickSort(int left, int right) {
+	private void quickSort(int left, int right, LinkedList<Car> localCarList) {
 
 		// If both cursor scanned the complete array quicksort exits
 		if (left >= right)
 			return;
 
 		// Pivot using median of 3 approach
-		Car pivot = getMedian(left, right);
-		int partition = partition(left, right, pivot);
+		Car pivot = getMedian(left, right, localCarList);
+		int partition = partition(left, right, pivot, localCarList);
 
 		// Recursively, calls the quicksort with the different left and right parameters
 		// of the sub-array
-		quickSort(0, partition - 1);
-		quickSort(partition + 1, right);
+		quickSort(0, partition - 1, localCarList);
+		quickSort(partition + 1, right, localCarList);
 	}
 
 	// This method is used to partition the given array and returns the integer
 	// which points to the sorted pivot index
-	private static int partition(int left, int right, Car pivot) {
+	private int partition(int left, int right, Car pivot, LinkedList<Car> localCarList) {
 		int leftCursor = left - 1;
 		int rightCursor = right;
 		while (leftCursor < rightCursor) {
@@ -65,37 +43,37 @@ public class QuicksortEngine {
 			if (leftCursor >= rightCursor) {
 				break;
 			} else {
-				swap(leftCursor, rightCursor);
+				swap(leftCursor, rightCursor, localCarList);
 			}
 		}
-		swap(leftCursor, right);
+		swap(leftCursor, right, localCarList);
 		return leftCursor;
 	}
 
-	public static Car getMedian(int left, int right) {
+	public Car getMedian(int left, int right, LinkedList<Car> localCarList) {
 		int center = (left + right) / 2;
 
 		if (((Comparable<Car>) localCarList.get(left)).compareTo(localCarList.get(center)) > 0)
-			swap(left, center);
+			swap(left, center, localCarList);
 
 		if (((Comparable<Car>) localCarList.get(left)).compareTo(localCarList.get(right)) > 0)
-			swap(left, right);
+			swap(left, right, localCarList);
 
 		if (((Comparable<Car>) localCarList.get(center)).compareTo(localCarList.get(right)) > 0)
-			swap(center, right);
+			swap(center, right, localCarList);
 
-		swap(center, right);
+		swap(center, right, localCarList);
 		return localCarList.get(right);
 	}
 
 	// This method is used to swap the values between the two given index
-	public static void swap(int left, int right) {
+	public void swap(int left, int right, LinkedList<Car> localCarList) {
 		Car temp = localCarList.get(left);
 		localCarList.set(left, localCarList.get(right));
 		localCarList.set(right, temp);
 	}
 
-	public static void printArray() {
+	public void printArray(LinkedList<Car> localCarList) {
 		for (Car car : localCarList) {
 			System.out.println(car + " ");
 		}
@@ -104,10 +82,10 @@ public class QuicksortEngine {
 	/**
 	 * Accessor and mutator methods for the localCarList
 	 */
-	public static LinkedList<Car> getLocalCarList(){
-		return localCarList;
-	}
-	public static void setLocalCarList(LinkedList<Car> carList){
-		localCarList = carList;
-	}
+	// public LinkedList<Car> getLocalCarList(){
+	// 	return localCarList;
+	// }
+	// public void setLocalCarList(LinkedList<Car> carList){
+	// 	localCarList = carList;
+	// }
 }

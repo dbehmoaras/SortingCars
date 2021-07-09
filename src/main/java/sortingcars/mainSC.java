@@ -14,10 +14,20 @@ public class mainSC{
 		 */
 
 		CarDataController.generateCarData(5,100);
+
+		QuicksortEngine quickSort = new QuicksortEngine();
+
 		LinkedList<Car> carList = CarDataController.readList(CarDataController.getFileList()[0]);
 		ListIterator<Car> carIter = carList.listIterator();
 		while(carIter.hasNext()){
-			System.out.println(carIter.next());
+			System.out.println(carIter.next().getDestination());
+		}
+
+		quickSort.sort(carList);
+		System.out.println("*****************************");
+		ListIterator<Car> carIter2 = carList.listIterator();
+		while (carIter2.hasNext()) {
+			System.out.println(carIter2.next().getDestination());
 		}
 	}
 }

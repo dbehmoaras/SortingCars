@@ -72,14 +72,14 @@ public class CarDataController {
 		numLists = numOfLists;
 		if (sorted) {
 			String[] localSortedFileList = new String[numOfLists];
-			for (int i = 1; i <= numOfLists; i += 1){
-				localSortedFileList[i-1] = createFile(i, true);
+			for (int i = 0; i < numOfLists; i += 1){
+				localSortedFileList[i] = createFile(i, true);
 			}
 			return localSortedFileList;
 		} else {
 			String[] localFileList = new String[numOfLists];
-			for (int i = 1; i <= numOfLists; i += 1) {
-				localFileList[i - 1] = createFile(i, false);
+			for (int i = 0; i < numOfLists; i += 1) {
+				localFileList[i] = createFile(i, false);
 			}
 			return localFileList;
 		}
