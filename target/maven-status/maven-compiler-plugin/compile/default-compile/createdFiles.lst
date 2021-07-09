@@ -1,8 +1,6 @@
 sortingcars/SortCriteria.class
-sortingcars/mainSC.class
 sortingcars/Car$Color.class
+sortingcars/mainSC.class
 sortingcars/Car.class
-sortingcars/WriteToTxt.class
 sortingcars/UniqueVinGen.class
 sortingcars/QuicksortEngine.class
-sortingcars/CreateTxt.class

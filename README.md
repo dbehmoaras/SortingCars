@@ -3,6 +3,8 @@
 To do:
 1. Create the list files. all of the pieces are ready.
 2. Implement the quicksort object array algorithm by accessing the car's compareTo method in the quicksort engine's partition method.
+3. Set up a thread pool the creates a thread for each list
+4. find a way run quicksort in separate threads
 git commit -m "added clear method to data generator. generates the Vin randomly in the car class's constructor.
 ---
 
@@ -49,5 +51,21 @@ git commit -m "added clear method to data generator. generates the Vin randomly 
 
 		System.out.println(Car.getRandomColor());
 		GenerateData.clear(fileName);
+
+		/**
+		 * create the file list and begin the rec_id count
+		 * make sure all of the data is clear in case the
+		 * files already exist
+		 */
+		int numberOfLists = 5;
+		int numberOfCars = 100;
+		String[] fileList = GenerateData.createFiles(numberOfLists);
+		long rec_id = 0;
+		GenerateData.clearAll(fileList);
+
+		for (rec_id++; rec_id <= numberOfCars; rec_id++){
+			Car car = new Car(rec_id);
+			GenerateData.write(fileList[(int) rec_id % numberOfLists], car);
+		}
 
 ```

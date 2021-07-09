@@ -37,6 +37,21 @@ public class Car implements Comparable<Car> {
 	}
 
 	/**
+	 * This version of the constructor is implemented only in the testing
+	 * suite for the Car class's compareTo function
+	 * @param rec_id
+	 * @param vin
+	 * @param color
+	 * @param destination
+	 */
+	public Car(long rec_id, String vin, Color color, String destination) {
+		REC_ID = rec_id;
+		VIN = vin;
+		COLOR = color;
+		DESTINATION = destination;
+	}
+
+	/**
 	 * Overloaded constructor for a random Car generator.
 	 * @param rec_id
 	 */
