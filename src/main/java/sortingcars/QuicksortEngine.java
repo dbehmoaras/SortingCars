@@ -4,13 +4,14 @@ import java.util.LinkedList;
 
 public class QuicksortEngine {
 
-	private static LinkedList<Car> carList;
+	private static LinkedList<Car> localCarList;
 
 	public static void main(String[] args) {
 		// Get an String array
 		// a = new String[] { "X", "E", "C", "A" };
-		CarData.generateCarData(5,100);
-		carList = CarData.readList(CarData.getFileList()[0]);
+		CarDataController.generateCarData(5,100);
+		CarDataController.createFiles(5, true);
+		setLocalCarList(CarDataController.readList(CarDataController.getFileList()[1]));
 
 		// prints the given array
 		printArray();
@@ -18,7 +19,9 @@ public class QuicksortEngine {
 		// sort the array
 		sort();
 
-		System.out.println("");
+		CarDataController.writeSortedCarData(localCarList, 1);
+
+		System.out.println(localCarList);
 
 		// prints the sorted array
 		printArray();
@@ -28,7 +31,7 @@ public class QuicksortEngine {
 	// This method sort an array internally and internally calls quickSort
 	public static void sort() {
 		int left = 0;
-		int right = carList.size() - 1;
+		int right = localCarList.size() - 1;
 
 		quickSort(left, right);
 	}
@@ -57,8 +60,8 @@ public class QuicksortEngine {
 		int leftCursor = left - 1;
 		int rightCursor = right;
 		while (leftCursor < rightCursor) {
-			while (((Comparable<Car>) carList.get(++leftCursor)).compareTo(pivot) < 0);
-			while (rightCursor > 0 && ((Comparable<Car>) carList.get(--rightCursor)).compareTo(pivot) > 0);
+			while (((Comparable<Car>) localCarList.get(++leftCursor)).compareTo(pivot) < 0);
+			while (rightCursor > 0 && ((Comparable<Car>) localCarList.get(--rightCursor)).compareTo(pivot) > 0);
 			if (leftCursor >= rightCursor) {
 				break;
 			} else {
@@ -72,30 +75,39 @@ public class QuicksortEngine {
 	public static Car getMedian(int left, int right) {
 		int center = (left + right) / 2;
 
-		if (((Comparable<Car>) carList.get(left)).compareTo(carList.get(center)) > 0)
+		if (((Comparable<Car>) localCarList.get(left)).compareTo(localCarList.get(center)) > 0)
 			swap(left, center);
 
-		if (((Comparable<Car>) carList.get(left)).compareTo(carList.get(right)) > 0)
+		if (((Comparable<Car>) localCarList.get(left)).compareTo(localCarList.get(right)) > 0)
 			swap(left, right);
 
-		if (((Comparable<Car>) carList.get(center)).compareTo(carList.get(right)) > 0)
+		if (((Comparable<Car>) localCarList.get(center)).compareTo(localCarList.get(right)) > 0)
 			swap(center, right);
 
 		swap(center, right);
-		return carList.get(right);
+		return localCarList.get(right);
 	}
 
 	// This method is used to swap the values between the two given index
 	public static void swap(int left, int right) {
-		Car temp = carList.get(left);
-		carList.set(left, carList.get(right));
-		carList.set(right, temp);
+		Car temp = localCarList.get(left);
+		localCarList.set(left, localCarList.get(right));
+		localCarList.set(right, temp);
 	}
 
 	public static void printArray() {
-		for (Car car : carList) {
-			System.out.print(car + " ");
+		for (Car car : localCarList) {
+			System.out.println(car + " ");
 		}
 	}
 
+	/**
+	 * Accessor and mutator methods for the localCarList
+	 */
+	public static LinkedList<Car> getLocalCarList(){
+		return localCarList;
+	}
+	public static void setLocalCarList(LinkedList<Car> carList){
+		localCarList = carList;
+	}
 }

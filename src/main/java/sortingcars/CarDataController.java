@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+
+
 import java.util.LinkedList;
 import sortingcars.Car.Color;
 
@@ -14,19 +16,41 @@ import sortingcars.Car.Color;
  * @param int: the number of the car list created
  * @return String: the file name so it can be used by the write method
  */
-public class CarData {
+public class CarDataController {
 
 	private static String[] fileList;
+	private static String[] sortedFileList;
+	private static int numLists;
 
-	public static String createFile(int listNum){
+	/**
+	 * Creates the text file. There is a better way to handle
+	 * the sorted option (ie overloading methods) but this way
+	 * is easier to implement and efficient to run.
+	 * @param listNum
+	 * @param sorted: boolean option. true if writing sorted
+	 * data, false otherwise
+	 * @return
+	 */
+	public static String createFile(int listNum, boolean sorted){
 		try {
-			File myObj = new File("carlists/cars-"+listNum+".txt");
-			if (myObj.createNewFile()) {
-				System.out.println("File created: " + myObj.getName());
-				return myObj.getName();
+			if (sorted){
+				File myObj = new File("carlists/carssorted-" + listNum + ".txt");
+				if (myObj.createNewFile()) {
+					System.out.println("File created: " + myObj.getName());
+					return myObj.getName();
+				} else {
+					System.out.println("File already exists.");
+					return myObj.getName();
+				}
 			} else {
-				System.out.println("File already exists.");
-				return myObj.getName();
+				File myObj = new File("carlists/cars-"+listNum+".txt");
+				if (myObj.createNewFile()) {
+					System.out.println("File created: " + myObj.getName());
+					return myObj.getName();
+				} else {
+					System.out.println("File already exists.");
+					return myObj.getName();
+				}
 			}
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
@@ -37,16 +61,28 @@ public class CarData {
 
 	/**
 	 * creates the lists and returns an array containing the
-	 * names of each file stored in the system
+	 * names of each file stored in the system based on the
+	 * sorted boolean option.
 	 * @param numOfLists
+	 * @param sorted: boolean option. true if writing sorted
+	 * data, false otherwise
 	 * @return
 	 */
-	public static String[] createFiles(int numOfLists){
-		String[] fileList = new String[numOfLists];
-		for (int i = 1; i <= numOfLists; i += 1){
-			fileList[i-1] = createFile(i);
+	public static String[] createFiles(int numOfLists, boolean sorted){
+		numLists = numOfLists;
+		if (sorted) {
+			String[] localSortedFileList = new String[numOfLists];
+			for (int i = 1; i <= numOfLists; i += 1){
+				localSortedFileList[i-1] = createFile(i, true);
+			}
+			return localSortedFileList;
+		} else {
+			String[] localFileList = new String[numOfLists];
+			for (int i = 1; i <= numOfLists; i += 1) {
+				localFileList[i - 1] = createFile(i, false);
+			}
+			return localFileList;
 		}
-		return fileList;
 	}
 
 	public static void write(String fileName, Car car) {
@@ -124,11 +160,6 @@ public class CarData {
 		}
 	}
 
-	/**
-	 * Generates car
-	 *
-	 */
-
 	 /**
 		* Generates car data randomly using the Car constructor with only the
 		* rec_id parameter.
@@ -140,19 +171,37 @@ public class CarData {
 		 * create the file list and begin the rec_id count make sure all of the data is
 		 * clear in case the files already exist
 		 */
-		fileList = CarData.createFiles(numberOfLists);
+		fileList = CarDataController.createFiles(numberOfLists, false);
 		long rec_id = 0;
-		CarData.clearAll(fileList);
+		CarDataController.clearAll(fileList);
 
 		for (rec_id++; rec_id <= numberOfCars; rec_id++) {
 			Car car = new Car(rec_id);
-			CarData.write(fileList[(int) rec_id % numberOfLists], car);
+			CarDataController.write(fileList[(int) rec_id % numberOfLists], car);
 		}
 	}
 
 
+	public static void writeSortedCarData(LinkedList<Car> carDataList, int listNumber){
+		String localFileName = CarDataController.createFile(listNumber, true);
+		for (int i = 0; i < carDataList.size(); i += 1){
+			CarDataController.write(localFileName, carDataList.get(i));
+		}
+	}
 
+	/**
+	 * accessor method for the fileList
+	 * @return	String[] of file names
+	 */
 	public static String[] getFileList(){
 		return fileList;
+	}
+
+	/**
+	 * accessor method for the sortedFileList
+	 * @return	String[] of file names
+	 */
+	public static String[] getSortedFileList(){
+		return sortedFileList;
 	}
 }

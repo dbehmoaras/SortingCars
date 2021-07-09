@@ -4,12 +4,15 @@ To do:
 1. Create the list files. all of the pieces are ready.
 	a. add a read method
 2. Implement the quicksort object array algorithm by accessing the car's compareTo method in the quicksort engine's partition method.
-3. Set up a thread pool the creates a thread for each list
-4. find a way run quicksort in separate threads
+DONE
+3. write sorted files
+
+4. Set up a thread pool the creates a thread for each list
+5. find a way run quicksort in separate threads
 git commit -m "added clear method to data generator. generates the Vin randomly in the car class's constructor.
 ---
 
-## Some sample test code
+## Some sample test code snippets
 ```java
 		int[] arr = { 10, 7, 8, 9, 1, 5 };
 		int n = arr.length;

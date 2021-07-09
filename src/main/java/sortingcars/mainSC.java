@@ -13,8 +13,8 @@ public class mainSC{
 		 * Main method
 		 */
 
-		CarData.generateCarData(5,100);
-		LinkedList<Car> carList = CarData.readList(CarData.getFileList()[0]);
+		CarDataController.generateCarData(5,100);
+		LinkedList<Car> carList = CarDataController.readList(CarDataController.getFileList()[0]);
 		ListIterator<Car> carIter = carList.listIterator();
 		while(carIter.hasNext()){
 			System.out.println(carIter.next());
