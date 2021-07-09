@@ -165,8 +165,10 @@ public class CarDataController {
 		* rec_id parameter.
 		* @param numberOfLists
 		* @param numberOfCars
+		* @return String[] of file names so that it can be accessed in the
+		* main method.
 	  */
-	public static void generateCarData(int numberOfLists, int numberOfCars) {
+	public static String[] generateCarData(int numberOfLists, int numberOfCars) {
 		/**
 		 * create the file list and begin the rec_id count make sure all of the data is
 		 * clear in case the files already exist
@@ -179,6 +181,8 @@ public class CarDataController {
 			Car car = new Car(rec_id);
 			CarDataController.write(fileList[(int) rec_id % numberOfLists], car);
 		}
+
+		return fileList;
 	}
 
 
