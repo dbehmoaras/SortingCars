@@ -23,6 +23,8 @@ public class mainSC{
 		 *
 		 * access the initial file list by generatring the car data
 		 * initialize the quick sort engine
+		 * initialize the ThreadPool
+		 *
 		 *
 		 * iterate through the initial file list
 		 * 	on every turn, use the CarDataController to access the

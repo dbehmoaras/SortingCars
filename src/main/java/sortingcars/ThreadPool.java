@@ -1,27 +1,19 @@
 package sortingcars;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.LinkedList;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class ThreadPool {
 
 	private BlockingQueue taskQueue = null;
-	private List<PoolThreadRunnable> runnables = new ArrayList<>();
+	private LinkedList<PoolThreadJob> runnables =
+		new LinkedList<PoolThreadJob>();
 	private boolean isStopped = false;
 
 	public ThreadPool(int noOfThreads, int maxNoOfTasks) {
-		taskQueue = new ArrayBlockingQueue(maxNoOfTasks);
-
-		for (int i = 0; i < noOfThreads; i++) {
-			PoolThreadRunnable poolThreadRunnable = new PoolThreadRunnable(taskQueue);
-
-			runnables.add(new PoolThreadRunnable(taskQueue));
-		}
-		for (PoolThreadRunnable runnable : runnables) {
-			new Thread(runnable).start();
-		}
+		taskQueue = new LinkedBlockingQueue<PoolThreadJob>(maxNoOfTasks);
 	}
 
 	public synchronized void execute(Runnable task) throws Exception {
@@ -33,7 +25,7 @@ public class ThreadPool {
 
 	public synchronized void stop() {
 		this.isStopped = true;
-		for (PoolThreadRunnable runnable : runnables) {
+		for (PoolThreadJob runnable : runnables) {
 			runnable.doStop();
 		}
 	}
@@ -48,4 +40,12 @@ public class ThreadPool {
 		}
 	}
 
+	public void addRunnable(){
+		PoolThreadJob poolThreadJob = new PoolThreadJob(taskQueue);
+		runnables.push(poolThreadJob);
+	}
+
+	public void startRunnable(Runnable runnable){
+		new Thread(runnable).start();
+	}
 }

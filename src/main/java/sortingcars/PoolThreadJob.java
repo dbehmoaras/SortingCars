@@ -2,13 +2,19 @@ package sortingcars;
 
 import java.util.concurrent.BlockingQueue;
 
-public class PoolThreadRunnable implements Runnable {
+
+/**
+ * Class that represents a runnable job object.
+ * The quicksort invocation gets passed into
+ * the thread pool as a runnable PoolThreadJob.
+ */
+public class PoolThreadJob implements Runnable {
 
 	private Thread thread = null;
 	private BlockingQueue taskQueue = null;
 	private boolean isStopped = false;
 
-	public PoolThreadRunnable(BlockingQueue queue) {
+	public PoolThreadJob(BlockingQueue queue) {
 		taskQueue = queue;
 	}
 
