@@ -14,7 +14,7 @@ public class WriteToTxt {
 			String writeToFile =
 				car.getDestination()+"\t"+car.getColor().toString()+
 				"\t"+car.getVin()+"\t"+car.getRecId()+"\n";
-			Files.write(Paths.get(fileName), writeToFile.getBytes(), StandardOpenOption.APPEND);
+			Files.write(Paths.get("carlists/"+fileName), writeToFile.getBytes(), StandardOpenOption.APPEND);
 			System.out.println("Successfully wrote to the file.");
 		} catch (IOException e) {
 			System.out.println("An error occurred.");

@@ -11,7 +11,7 @@ import java.io.IOException;
 public class CreateTxt {
 	public static String create(int listNum) {
 		try {
-			File myObj = new File("cars-"+listNum+".txt");
+			File myObj = new File("carlists/cars-"+listNum+".txt");
 			if (myObj.createNewFile()) {
 				System.out.println("File created: " + myObj.getName());
 				return myObj.getName();

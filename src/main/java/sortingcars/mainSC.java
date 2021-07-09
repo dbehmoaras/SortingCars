@@ -1,5 +1,8 @@
 package sortingcars;
+import java.util.concurrent.ThreadLocalRandom;
+
 import sortingcars.Car.Color;
+
 
 
 public class mainSC{
@@ -19,12 +22,16 @@ public class mainSC{
 
 		Car testCar1 = new Car(1, "PW4Y2JD5099A", Color.BLACK, "Los Angeles");
 		Car testCar2 = new Car(2, "ND5N2XLUDMTB", Color.RED, "Miami");
-		Car testCar3 = new Car(1, "PW4Y2JD5099B", Color.BLACK, "Los Angeles");
+		Car testCar3 = new Car(3, "PW4Y2JD5099B", Color.BLACK, "Los Angeles");
 
 		String fileName = CreateTxt.create(1);
 		WriteToTxt.write(fileName, testCar1);
 		WriteToTxt.write(fileName, testCar2);
 		WriteToTxt.write(fileName, testCar3);
+
+
+
+		// RandomString gen = new RandomString(12, ThreadLocalRandom.current());
 
 	}
 }
