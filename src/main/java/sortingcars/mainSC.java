@@ -24,16 +24,23 @@ public class mainSC{
 		Car testCar2 = new Car(2, "ND5N2XLUDMTB", Color.RED, "Miami");
 		Car testCar3 = new Car(3, "PW4Y2JD5099B", Color.BLACK, "Los Angeles");
 
-		String fileName = CreateTxt.create(1);
-		WriteToTxt.write(fileName, testCar1);
-		WriteToTxt.write(fileName, testCar2);
-		WriteToTxt.write(fileName, testCar3);
+		// String fileName = CreateTxt.create(1);
+		// WriteToTxt.write(fileName, testCar1);
+		// WriteToTxt.write(fileName, testCar2);
+		// WriteToTxt.write(fileName, testCar3);
 
 
 		// System.out.println(ThreadLocalRandom.current().nextInt(0,100));
 
-		UniqueVinGen gen = new UniqueVinGen(12, ThreadLocalRandom.current());
-		String randString = gen.nextString();
-		System.out.println(randString);
+		UniqueVinGen gen = new UniqueVinGen(1, ThreadLocalRandom.current());
+
+		int i = 0;
+		while (i < 7) {
+			String randString = gen.nextString();
+			System.out.println(randString);
+			i += 1;
+		}
+
+
 	}
 }
