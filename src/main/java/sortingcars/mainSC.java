@@ -30,8 +30,10 @@ public class mainSC{
 		WriteToTxt.write(fileName, testCar3);
 
 
+		// System.out.println(ThreadLocalRandom.current().nextInt(0,100));
 
-		// RandomString gen = new RandomString(12, ThreadLocalRandom.current());
-
+		RandomString gen = new RandomString(12, ThreadLocalRandom.current());
+		String randString = gen.nextString();
+		System.out.println(randString);
 	}
 }
