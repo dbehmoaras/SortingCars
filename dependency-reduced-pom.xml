@@ -18,7 +18,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>sortingcars.mainSC</mainClass>
+                  <mainClass>sortingcars.ThreadPoolMain</mainClass>
                 </transformer>
               </transformers>
             </configuration>

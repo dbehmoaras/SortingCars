@@ -18,7 +18,9 @@ public class PoolThreadJob implements Runnable {
 	/**
 	 * Constructor for the PoolThreadJob Runnable object.
 	 * Accepts a blocking queue as an argument and stores
-	 * it on the instance.
+	 * it on the instance. This has the effect of binding
+	 * the passed in BlockingQueue instance to an instance
+	 * of a PoolThreadJob object.
 	 * @param queue
 	 */
 	public PoolThreadJob(BlockingQueue queue) {
@@ -59,6 +61,7 @@ public class PoolThreadJob implements Runnable {
 	}
 
 	public synchronized void doStop() {
+		this.thread = Thread.currentThread();
 		isStopped = true;
 		// break pool thread out of dequeue() call.
 		this.thread.interrupt();
@@ -66,5 +69,9 @@ public class PoolThreadJob implements Runnable {
 
 	public synchronized boolean isStopped() {
 		return isStopped;
+	}
+
+	public void addToQueue(Runnable job){
+		taskQueue.add(job);
 	}
 }

@@ -36,19 +36,19 @@ public class CarDataController {
 			if (sorted){
 				File myObj = new File("carlists/carssorted-" + listNum + ".txt");
 				if (myObj.createNewFile()) {
-					System.out.println("File created: " + myObj.getName());
+					// System.out.println("File created: " + myObj.getName());
 					return myObj.getName();
 				} else {
-					System.out.println("File already exists.");
+					// System.out.println("File already exists.");
 					return myObj.getName();
 				}
 			} else {
 				File myObj = new File("carlists/cars-"+listNum+".txt");
 				if (myObj.createNewFile()) {
-					System.out.println("File created: " + myObj.getName());
+					// System.out.println("File created: " + myObj.getName());
 					return myObj.getName();
 				} else {
-					System.out.println("File already exists.");
+					// System.out.println("File already exists.");
 					return myObj.getName();
 				}
 			}
@@ -104,7 +104,7 @@ public class CarDataController {
 	public static void clear(String fileName){
 		try {
 			Files.write(Paths.get("carlists/" + fileName), "".getBytes());
-			System.out.println("Cleared");
+			// System.out.println("Cleared");
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
@@ -120,7 +120,7 @@ public class CarDataController {
 			for (int i = 0; i < fileList.length; i += 1) {
 				Files.write(Paths.get("carlists/" + fileList[i]), "".getBytes());
 			}
-			System.out.println("All Files Cleared");
+			// System.out.println("All Files Cleared");
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
