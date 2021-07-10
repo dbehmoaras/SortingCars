@@ -10,23 +10,50 @@ import java.util.concurrent.BlockingQueue;
  */
 public class PoolThreadJob implements Runnable {
 
+
 	private Thread thread = null;
 	private BlockingQueue taskQueue = null;
 	private boolean isStopped = false;
 
+	/**
+	 * Constructor for the PoolThreadJob Runnable object.
+	 * Accepts a blocking queue as an argument and stores
+	 * it on the instance.
+	 * @param queue
+	 */
 	public PoolThreadJob(BlockingQueue queue) {
 		taskQueue = queue;
 	}
 
+	/**
+	 * This PoolThreadJob implements the runnable interface,
+	 * so this is it's dedicated run() method. When an object
+	 * implementing Runnable is used to create a thead (ie
+	 * below) starting the thread causes the object's run
+	 * method to be called in that separately executing thread.
+	 */
 	public void run() {
+		/**
+		 * Allocates a single thread to this run method.
+		 * IE binds an isntance of the PoolThreadJob to
+		 * the thread returned below before running the
+		 * callback stored in the runnable taken from the
+		 * taskQueue.
+		 */
 		this.thread = Thread.currentThread();
+
+		/**
+		 * While the thread is running
+		 * 	it takes a Runnable object from the taskQueue
+		 * 	and runs the callback stored as the task on
+		 * 	that Runnable object.
+		 */
 		while (!isStopped()) {
 			try {
 				Runnable runnable = (Runnable) taskQueue.take();
 				runnable.run();
 			} catch (Exception e) {
-				// log or otherwise report exception,
-				// but keep pool thread alive.
+				System.out.println("Error in PoolThreadJob Run() instance");
 			}
 		}
 	}

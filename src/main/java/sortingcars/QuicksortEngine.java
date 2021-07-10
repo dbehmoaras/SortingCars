@@ -78,14 +78,4 @@ public class QuicksortEngine {
 			System.out.println(car + " ");
 		}
 	}
-
-	/**
-	 * Accessor and mutator methods for the localCarList
-	 */
-	// public LinkedList<Car> getLocalCarList(){
-	// 	return localCarList;
-	// }
-	// public void setLocalCarList(LinkedList<Car> carList){
-	// 	localCarList = carList;
-	// }
 }

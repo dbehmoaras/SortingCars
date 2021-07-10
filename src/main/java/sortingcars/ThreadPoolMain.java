@@ -32,17 +32,12 @@ public class ThreadPoolMain {
 				System.out.println(message);
 			});
 		}
-		System.out.println("gets here");
-		// for (int i = 0; i < 5; i++) {
-		// 	int taskNo2 = i;
-		// 	threadPool.execute(() -> {
-		// 		String message = Thread.currentThread().getName() + ": Task 2" + taskNo2;
-		// 		System.out.println(message);
-		// 	});
-		// }
-
 		threadPool.waitUntilAllTasksFinished();
 		threadPool.stop();
+
+
+		System.out.println("gets here");
+
 
 	}
 }

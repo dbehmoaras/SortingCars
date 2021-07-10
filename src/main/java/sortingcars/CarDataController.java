@@ -188,6 +188,7 @@ public class CarDataController {
 
 	public static void writeSortedCarData(LinkedList<Car> carDataList, int listNumber){
 		String localFileName = CarDataController.createFile(listNumber, true);
+		CarDataController.clear(localFileName);
 		for (int i = 0; i < carDataList.size(); i += 1){
 			CarDataController.write(localFileName, carDataList.get(i));
 		}

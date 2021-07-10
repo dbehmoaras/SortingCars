@@ -1,14 +1,13 @@
 package sortingcars;
 
-// import java.util.HashMap;
 import java.util.Map;
 import sortingcars.Car.Color;
 
 
 /**
  * SortCriteria provides a static interface containing two Maps
- * definine the order to refer to when sorting the destination
- * or the color that will be accessed by the quick sort engine.
+ * defining the sorting orders for Destinations and Colors to refer.
+ * The Maps are accessed by the Car's compareTo method.
  */
 public class SortCriteria {
 

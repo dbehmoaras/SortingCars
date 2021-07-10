@@ -9,7 +9,7 @@ public class Car implements Comparable<Car> {
 	private String VIN;
 	private Color COLOR;
 	private String DESTINATION;
-	private UniqueVinGen vinGen = new UniqueVinGen(12, ThreadLocalRandom.current());
+	private final UniqueVinGen vinGen = new UniqueVinGen(12, ThreadLocalRandom.current());
 
 	/* define the enumerator for the Color options */
 	public static enum Color {
@@ -61,8 +61,6 @@ public class Car implements Comparable<Car> {
 		COLOR = getRandomColor();
 		DESTINATION = getRandomDest();
 	}
-
-
 
 	/**
 	 * Chooses a random color for the car.
@@ -123,7 +121,7 @@ public class Car implements Comparable<Car> {
 	/**
 	 * Mutator and accessor methods for the car class are all
 	 * below this javadoc. The methods are self explanatory.
-	 * A mutator is not needed for the VIN is not needed since
+	 * A mutator is not needed for the VIN since
 	 * it is a randomly generated unique 12-digit alphanumeric
 	 * String.
 	 *

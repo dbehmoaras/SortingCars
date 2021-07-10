@@ -1,10 +1,14 @@
 package sortingcars;
 
-import java.util.ArrayList;
+
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+
+/**
+ * T
+ */
 public class ThreadPool {
 
 	private BlockingQueue taskQueue = null;
