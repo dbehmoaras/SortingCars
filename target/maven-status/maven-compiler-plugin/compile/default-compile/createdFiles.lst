@@ -1,6 +1,5 @@
 sortingcars/SortCriteria.class
 sortingcars/Car$Color.class
-sortingcars/mainSC.class
 sortingcars/Car.class
 sortingcars/UniqueVinGen.class
 sortingcars/QuicksortEngine.class

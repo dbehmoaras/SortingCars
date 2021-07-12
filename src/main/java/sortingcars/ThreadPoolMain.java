@@ -1,7 +1,6 @@
 package sortingcars;
 
 import java.util.LinkedList;
-import java.util.Iterator;
 
 public class ThreadPoolMain {
 

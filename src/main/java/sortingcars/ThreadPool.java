@@ -3,7 +3,6 @@ package sortingcars;
 
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 
 
 /**
@@ -17,8 +16,6 @@ public class ThreadPool {
 	public LinkedList<PoolThreadJob> runnables =
 		new LinkedList<PoolThreadJob>();
 	private boolean isStopped = false;
-	// private int maxNoOfThreads;
-
 
 	/**
 	 * Main constructor for the ThreadPool class.
@@ -40,8 +37,6 @@ public class ThreadPool {
 			throw new IllegalStateException("ThreadPool is stopped");
 		this.startRunnable(task);
 		if (runnables.size() > 0) taskQueue.add(runnables.pollFirst());
-		// this.taskQueue.put(task);
-		// this.wait();
 	}
 
 
@@ -60,7 +55,6 @@ public class ThreadPool {
 	 */
 	public synchronized void waitUntilAllTasksFinished() {
 		while (this.taskQueue.size() > 0) {
-			// System.out.println("runnables size" + this.taskQueue.size());
 			while (runnables.size() > 0) {
 				taskQueue.add(runnables.pollFirst());
 				System.out.println("polled");
@@ -85,12 +79,6 @@ public class ThreadPool {
 			System.out.println("Thread pool full. Pushing to runnables list");
 			runnables.push(poolJob);
 		}
-		// if (runnables.size() < maxNoOfThreads){
-		// } else {
-		// 	System.out.println("***WARNING: Maximum number of threads reached. "+
-		// 		"Offering task to blocking queue.***");
-		// 	this.taskQueue.offer(poolJob);
-		// }
 	}
 
 	/**
@@ -100,6 +88,5 @@ public class ThreadPool {
 	public void startRunnable(Runnable runnable){
 		Thread newThread = new Thread(runnable);
 		newThread.start();
-		// newThread.notify();
 	}
 }
