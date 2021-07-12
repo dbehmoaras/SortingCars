@@ -2,7 +2,7 @@
 
 ## Getting Started:
 
-A package has already been provided. However, in the evnt certain dependencies are missing, please run the following command in the terminal:
+A package has already been provided. However, in the event certain dependencies are missing, please run the following command in the terminal:
 ```
 mvn package
 ```
