@@ -9,7 +9,7 @@ public class ThreadPoolMain {
 	// private static String[] sortedFileList;
 
 	private static final int NUMBEROFLISTS = 5;
-	private static final int NUMBEROFCARS = 240;
+	private static final int NUMBEROFCARS = 280;
 	private static final int NUMBEROFTHREADS = 5;
 
 
